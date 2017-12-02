@@ -1,5 +1,5 @@
 
-library den_api;
+library pen_api;
 
 export 'src/package_dep.dart';
 export 'src/pubspec.dart';

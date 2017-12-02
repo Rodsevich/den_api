@@ -1,5 +1,5 @@
 
-library den_api.src.yaml_edit;
+library pen_api.src.yaml_edit;
 
 import 'package:yaml/yaml.dart';
 import 'package:source_span/source_span.dart';

@@ -1,5 +1,5 @@
 
-library den_api.src.github_repo_description;
+library pen_api.src.github_repo_description;
 
 import 'dart:async';
 

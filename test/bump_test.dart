@@ -1,10 +1,9 @@
+library pen_api.test.bump;
 
-library den_api.test.bump;
-
-import 'package:den_api/src/bump.dart';
-import 'package:den_api/src/release_type.dart';
+import 'package:pen_api/src/bump.dart';
+import 'package:pen_api/src/release_type.dart';
 import 'package:pub_semver/pub_semver.dart';
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 
 main() {
   group('bumpVersion', () {
@@ -54,11 +53,17 @@ main() {
     });
 
     test('throws when trying to bump pre-release of a non-pre-release', () {
-      expect(() => bumpVersion(new Version.parse('1.2.3'), ReleaseType.release, pre: true), throwsArgumentError);
+      expect(
+          () => bumpVersion(new Version.parse('1.2.3'), ReleaseType.release,
+              pre: true),
+          throwsArgumentError);
     });
 
     test('throws when trying to bump to a pre-release of a build bump', () {
-      expect(() => bumpVersion(new Version.parse('1.2.3'), ReleaseType.build, pre: true), throwsArgumentError);
+      expect(
+          () => bumpVersion(new Version.parse('1.2.3'), ReleaseType.build,
+              pre: true),
+          throwsArgumentError);
     });
   });
 }
@@ -66,5 +71,8 @@ main() {
 testBump(String v1, ReleaseType releaseType, pre, String v2) {
   var initial = new Version.parse(v1);
   var bumped = bumpVersion(initial, releaseType, pre: pre);
+  expect(bumped, new Version.parse(v2));
+}
+, releaseType, pre: pre);
   expect(bumped, new Version.parse(v2));
 }

@@ -1,5 +1,5 @@
 
-library den_api.src.release_type;
+library pen_api.src.release_type;
 
 class ReleaseType {
   final String _name;

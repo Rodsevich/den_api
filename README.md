@@ -1,2 +1,2 @@
-# den_api
-A programmatic API for den (https://github.com/seaneagan/den).
+# pen_api
+A programmatic API for pen (https://github.com/Rodsevich/pen).

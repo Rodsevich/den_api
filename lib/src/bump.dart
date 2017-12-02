@@ -1,5 +1,5 @@
 
-library den_api.src.bump;
+library pen_api.src.bump;
 
 import 'package:pub_semver/pub_semver.dart';
 

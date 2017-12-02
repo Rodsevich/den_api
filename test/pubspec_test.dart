@@ -1,31 +1,28 @@
+library pen_api.test.pubspec;
 
-library den_api.test.pubspec;
-
-import 'package:den_api/src/pubspec.dart';
-import 'package:den_api/src/package_dep.dart';
+import 'package:pen_api/src/pubspec.dart';
+import 'package:pen_api/src/package_dep.dart';
 import 'package:path/path.dart' as p;
 import 'package:pub_semver/pub_semver.dart';
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 import 'package:yaml/yaml.dart';
 
 main() {
   group('Pubspec', () {
     test('constructor', () {
-      var pubspec = new Pubspec(null, pubspecContents, loadYamlNode(pubspecContents));
+      var pubspec =
+          new Pubspec(null, pubspecContents, loadYamlNode(pubspecContents));
       expect(pubspec.name, 'foo');
       expect(pubspec.author, 'Jane Doe');
       expect(pubspec.version, new Version.parse('1.2.3'));
-      expect(pubspec.dependencies, {
-        'bar': 'any',
-        'baz': '>=1.0.0 <2.0.0'
-      });
+      expect(pubspec.dependencies, {'bar': 'any', 'baz': '>=1.0.0 <2.0.0'});
     });
 
     group('addDependency', () {
-
       test('should add a hosted dependency', () {
         testAddDependency(
-            new PackageDep('abc', 'hosted', new VersionConstraint.parse('1.0.0'), null),
+            new PackageDep(
+                'abc', 'hosted', new VersionConstraint.parse('1.0.0'), null),
             pubspecContents,
             '''
 $preamble
@@ -40,7 +37,8 @@ dev_dependencies:
 
       test('should replace an existing dependency', () {
         testAddDependency(
-            new PackageDep('baz', 'hosted', new VersionConstraint.parse('2.0.0'), null),
+            new PackageDep(
+                'baz', 'hosted', new VersionConstraint.parse('2.0.0'), null),
             pubspecContents,
             '''
 $preamble
@@ -55,7 +53,8 @@ dev_dependencies:
 
     test('should add dependencies key if missing', () {
       testAddDependency(
-          new PackageDep('abc', 'hosted', new VersionConstraint.parse('1.0.0'), null),
+          new PackageDep(
+              'abc', 'hosted', new VersionConstraint.parse('1.0.0'), null),
           preamble,
           '''
 $preamble
@@ -68,9 +67,7 @@ dependencies:
   test('should add a path dependency', () {
     var path = p.join('foo', 'bar', 'baz');
     testAddDependency(
-        new PackageDep('abc', 'path', null, path),
-        pubspecContents,
-        '''
+        new PackageDep('abc', 'path', null, path), pubspecContents, '''
 $preamble
 dependencies:
   bar: any
@@ -85,8 +82,7 @@ dev_dependencies:
   test('should add a git dependency', () {
     testAddDependency(
         new PackageDep('abc', 'git', null, 'git://github.com/foo/bar.git'),
-        pubspecContents,
-        '''
+        pubspecContents, '''
 $preamble
 dependencies:
   bar: any
@@ -101,8 +97,7 @@ dev_dependencies:
   test('should add a git dependency as first dependency', () {
     testAddDependency(
         new PackageDep('bar', 'git', null, 'git://github.com/foo/bar.git'),
-        preamble,
-        '''
+        preamble, '''
 $preamble
 dependencies:
   bar:
@@ -132,8 +127,12 @@ dev_dependencies:
   });
 
   test('should add a dev dependency when dev is true', () {
-    var pubspec = new Pubspec(null, pubspecContents, loadYamlNode(pubspecContents));
-    pubspec.addDependency(new PackageDep('abc', 'hosted', new VersionConstraint.parse('1.0.0'), null), dev: true);
+    var pubspec =
+        new Pubspec(null, pubspecContents, loadYamlNode(pubspecContents));
+    pubspec.addDependency(
+        new PackageDep(
+            'abc', 'hosted', new VersionConstraint.parse('1.0.0'), null),
+        dev: true);
     expect(pubspec.contents, '''
 $preamble
 dependencies:
@@ -146,9 +145,9 @@ dev_dependencies:
   });
 
   group('undepend', () {
-
     test('should remove a dependency', () {
-      var pubspec = new Pubspec(null, pubspecContents, loadYamlNode(pubspecContents));
+      var pubspec =
+          new Pubspec(null, pubspecContents, loadYamlNode(pubspecContents));
       pubspec.undepend('baz');
       expect(pubspec.contents, '''
 $preamble
@@ -159,7 +158,9 @@ dev_dependencies:
 ''');
     });
 
-    test('should error when trying to remove a dependency from a yaml flow mapping', () {
+    test(
+        'should error when trying to remove a dependency from a yaml flow mapping',
+        () {
       var flowMapping = '''
 $preamble
 dependencies: {
@@ -182,7 +183,8 @@ dev_dependencies:
     });
 
     test('should remove the dependency group node when it becomes empty', () {
-      var pubspec = new Pubspec(null, pubspecContents, loadYamlNode(pubspecContents));
+      var pubspec =
+          new Pubspec(null, pubspecContents, loadYamlNode(pubspecContents));
       pubspec.undepend('unittest');
       expect(pubspec.contents, '''
 $preamble
@@ -194,8 +196,10 @@ dependencies:
   });
 }
 
-testAddDependency(PackageDep dependency, String originalContents, String expectedNewContents) {
-  var pubspec = new Pubspec(null, originalContents, loadYamlNode(originalContents));
+testAddDependency(PackageDep dependency, String originalContents,
+    String expectedNewContents) {
+  var pubspec =
+      new Pubspec(null, originalContents, loadYamlNode(originalContents));
   pubspec.addDependency(dependency);
   expect(pubspec.contents, expectedNewContents);
 }
