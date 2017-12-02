@@ -1,16 +1,16 @@
 name: pen_api
 version: 0.1.1
-author: Nico Rodsevich <nicorodsevich@gmail.com
+author: Nico Rodsevich <nicorodsevich@gmail.com>
 description: A programmatic API for den (forked from den_api).
 homepage: https://github.com/Rodsevich/pen_api
 environment:
-  sdk: '>=1.0.0 <2.0.0'
+  sdk: '>=1.8.0 <2.0.0'
 dependencies:
   contrast: '>=0.1.1 <0.2.0'
   convert: '^2.0.1'
   github: '^3.0.0'
   path: '>=1.3.0 <2.0.0'
-  pub_package_data: any
+  pub_package_data: ^0.0.1
   pub_semver: '>=1.1.0 <2.0.0'
   source_span: '>=1.0.3 <2.0.0'
   which: '>=0.1.3 <0.2.0'
