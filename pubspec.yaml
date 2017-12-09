@@ -1,5 +1,5 @@
 name: pen_api
-version: 0.1.1
+version: 0.1.2
 author: Nico Rodsevich <nicorodsevich@gmail.com>
 description: A programmatic API for den (forked from den_api).
 homepage: https://github.com/Rodsevich/pen_api

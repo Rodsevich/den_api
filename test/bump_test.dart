@@ -73,6 +73,3 @@ testBump(String v1, ReleaseType releaseType, pre, String v2) {
   var bumped = bumpVersion(initial, releaseType, pre: pre);
   expect(bumped, new Version.parse(v2));
 }
-, releaseType, pre: pre);
-  expect(bumped, new Version.parse(v2));
-}
